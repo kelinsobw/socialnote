@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'socialnote',
+    'profiles',
 ]
 
 
@@ -77,9 +78,9 @@ WSGI_APPLICATION = 'socialnote.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "snote",
-        "USER": "snote",
-        "PASSWORD": "snote",
+        "NAME": "snote2",
+        "USER": "snote2",
+        "PASSWORD": "snote2",
         "HOST": "localhost",
         "PORT": 5432,
     }
