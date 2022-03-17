@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 
@@ -36,6 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "rest_framework",
+    "crispy_forms",
+    "crispy_bootstrap5",
+    "django_rq",
     'main',
     'socialnote',
     'profiles',
@@ -70,6 +74,9 @@ TEMPLATES = [
     },
 ]
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
 WSGI_APPLICATION = 'socialnote.wsgi.application'
 
 # Database
@@ -78,9 +85,9 @@ WSGI_APPLICATION = 'socialnote.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "snote2",
-        "USER": "snote2",
-        "PASSWORD": "snote2",
+        "NAME": "note",
+        "USER": "note",
+        "PASSWORD": "note",
         "HOST": "localhost",
         "PORT": 5432,
     }
@@ -125,6 +132,14 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+RQ_QUEUES = {
+    "default": {
+        "HOST": os.getenv("REDIS_HOST", "localhost"),
+        "PORT": 6379,
+        "DB": 0,
+        "DEFAULT_TIMEOUT": 360,
+    },
+}
 
 LOGGING = {
     "version": 1,
