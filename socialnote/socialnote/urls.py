@@ -16,10 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from main.views import add_database
 from socialnote.views import register
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("home/", include('main.urls')),
-    path("register/", register, name="register")
+    path("register/", register, name="register"),
+    path("add_basadate/", add_database)
 ]
