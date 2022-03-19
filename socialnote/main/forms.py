@@ -3,8 +3,12 @@ from django import forms
 
 class AddDatabase(forms.Form):
     type_choice = [
-        ("Ch", 'Ch'),
-        ("F", 'Female')]
+        ("INTEGER", 'INTEGER'),
+        ("SERIAL", 'SERIAL'),
+        ("CHAR", 'CHAR'),
+        ("VARCHAR", 'VARCHAR'),
+        ("REAL", 'REAL'),
+        ("BOOLEAN", 'BOOLEAN')]
     privates = [
         ("None", "None"),
         ("Friends", "Friends"),

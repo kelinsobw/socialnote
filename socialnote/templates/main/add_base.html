@@ -22,15 +22,17 @@
             document.getElementById('div_id_base_8').hidden = true;
             document.getElementById('div_id_type_8').hidden = true;
         </script>
-        <button type="submit" id="hider">Add pole</button>
+
         <button type="submit" class="save btn btn-primary">Save</button>
+        <button type="button" class="save btn btn-primary" id="Add">Add</button>
         <script>
             let cout_hide=2
-            document.getElementById('hider').onclick = function () {
+            document.getElementById("Add").onclick = function () {
                 document.getElementById(String('div_id_base_'+String(cout_hide))).hidden = false;
                 document.getElementById(String('div_id_type_'+String(cout_hide))).hidden = false;
                 cout_hide=cout_hide+1
             }
         </script>
     </form>
+
 {% endblock %}

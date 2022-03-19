@@ -21,7 +21,7 @@ from socialnote.views import register
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("home/", include('main.urls')),
+    path("", include('main.urls')),
     path("register/", register, name="register"),
     path("add_basadate/", add_database)
 ]

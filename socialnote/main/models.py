@@ -9,4 +9,9 @@ class Databases(models.Model):
     db_name = models.CharField(unique=True, max_length=30)
     db_description = models.CharField(max_length=30)
     created_at = models.DateTimeField(auto_now_add=True, db_index=True)
-    privates = models.IntegerField()
+
+
+class Privates(models.Model):
+    base = models.ForeignKey(Databases, on_delete=models.CASCADE)
+    privates = models.CharField(max_length=10)
+
