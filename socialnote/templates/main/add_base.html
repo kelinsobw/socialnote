@@ -1,0 +1,36 @@
+{% extends "main/base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+    <h1>Add database</h1>
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <script>
+            document.getElementById('div_id_base_2').hidden = true;
+            document.getElementById('div_id_type_2').hidden = true;
+            document.getElementById('div_id_base_3').hidden = true;
+            document.getElementById('div_id_type_3').hidden = true;
+            document.getElementById('div_id_base_4').hidden = true;
+            document.getElementById('div_id_type_4').hidden = true;
+            document.getElementById('div_id_base_5').hidden = true;
+            document.getElementById('div_id_type_5').hidden = true;
+            document.getElementById('div_id_base_6').hidden = true;
+            document.getElementById('div_id_type_6').hidden = true;
+            document.getElementById('div_id_base_7').hidden = true;
+            document.getElementById('div_id_type_7').hidden = true;
+            document.getElementById('div_id_base_8').hidden = true;
+            document.getElementById('div_id_type_8').hidden = true;
+        </script>
+        <button type="submit" id="hider">Add pole</button>
+        <button type="submit" class="save btn btn-primary">Save</button>
+        <script>
+            let cout_hide=2
+            document.getElementById('hider').onclick = function () {
+                document.getElementById(String('div_id_base_'+String(cout_hide))).hidden = false;
+                document.getElementById(String('div_id_type_'+String(cout_hide))).hidden = false;
+                cout_hide=cout_hide+1
+            }
+        </script>
+    </form>
+{% endblock %}
