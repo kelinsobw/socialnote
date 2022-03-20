@@ -47,6 +47,5 @@ def add_database(request):
 
 
 def table_view(request, db_name):
-    bases =
     bases = get_the_date(db_name)
     return render(request, "main/table_view.html", {"bases": bases})

@@ -39,6 +39,7 @@ def create_table(info_base):
     con.commit()
     con.close()
 
+
 def get_the_date(table_name):
     con = psycopg2.connect(
         database=(DATABASES.get('default')).get("NAME"),
@@ -48,12 +49,27 @@ def get_the_date(table_name):
         port=(DATABASES.get('default')).get("PORT")
     )
     cur = con.cursor()
-    request_base = (f'SELECT column_name FROM {table_name}; ')
+    request_base = (f'SELECT * FROM "{table_name}"; ')
     cur.execute(request_base)
-    data = cur.fetchall()
-    request_base = (f'SELECT * FROM {table_name}; ')
-    cur.execute(request_base)
-    data = cur.fetchall()
+    data = [cur.fetchall()]
     con.commit()
     con.close()
+    data = [view_colums_table(table_name), data]
     return data
+
+
+def view_colums_table(table_name):
+    con = psycopg2.connect(
+        database=(DATABASES.get('default')).get("NAME"),
+        user=(DATABASES.get('default')).get("USER"),
+        password=(DATABASES.get('default')).get("PASSWORD"),
+        host=(DATABASES.get('default')).get("HOST"),
+        port=(DATABASES.get('default')).get("PORT")
+    )
+    cur = con.cursor()
+    request_base = (f"SELECT column_name FROM INFORMATION_SCHEMA.columns where table_name='{table_name}'; ")
+    cur.execute(request_base)
+    colums_name = cur.fetchall()
+    con.commit()
+    con.close()
+    return colums_name
