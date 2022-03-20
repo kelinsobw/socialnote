@@ -1,0 +1,19 @@
+{% extends "main/base.html" %}
+{% block title %}Note views{% endblock %}
+{% block content %}
+    <div class="databases">
+        <h1 class="my-4">Latest note</h1>
+        <table>
+            {% for database in bases %}
+                <tr>
+                    {% for element in database %}
+                        <p class="card-text">
+                        <p>
+                        <td> {{ element }} </tr>
+                        </p>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

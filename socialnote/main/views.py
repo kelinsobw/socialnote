@@ -6,9 +6,14 @@ from django.http import HttpResponse
 
 from main.forms import  AddDatabase
 from main.models import Databases, Privates
-from main.postgres_def import create_table
+from main.postgres_def import create_table, get_the_date
 
 logger = logging.getLogger(__name__)
+
+
+def my_list(request):
+    bases = Databases.objects.filter(author=request.user).order_by("-created_at")
+    return render(request, "main/list.html", {"bases": bases})
 
 
 def index(request):
@@ -39,3 +44,9 @@ def add_database(request):
             form = AddDatabase()
         return render(request, "main/add_base.html", {"form": form})
     return HttpResponse("You don't authenticated!")
+
+
+def table_view(request, db_name):
+    bases =
+    bases = get_the_date(db_name)
+    return render(request, "main/table_view.html", {"bases": bases})

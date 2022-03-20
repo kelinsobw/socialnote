@@ -14,4 +14,3 @@ class Databases(models.Model):
 class Privates(models.Model):
     base = models.ForeignKey(Databases, on_delete=models.CASCADE)
     privates = models.CharField(max_length=10)
-

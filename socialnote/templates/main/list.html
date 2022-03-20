@@ -1,23 +1,24 @@
 {% extends "main/base.html" %}
 {% block title %}Note views{% endblock %}
 {% block content %}
-  <div class="databases">
-    <h1 class="my-4">Latest note</h1>
-    <div class="row">
-      {% for database in bases %}
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">{{ database.db_name }}</h5>
-              <p class="card-text">
-                {{ database.db_description}}
-              </p>
-                <p class="card-text">
-                {{ database.author}}
-              </p>
-            </div>
-          </div>
-        </div>
-      {% endfor %}
+    <div class="databases">
+        <h1 class="my-4">Latest note</h1>
+        <div class="row">
+            {% for database in bases %}
+                <div class="card">
+                    <div class="card-body">
+                        <p class="post-link">
+                            <a href="{% url "table_view" database.db_name%}">{{ database.db_name }}</a></p>
+                        <p class="card-text">
+                            {{ database.db_description }}
+                        </p>
+                        <p class="card-text">
+                            {{ database.author }}
+                        </p>
+                    </div>
+                </div>
+                </div>
+            {% endfor %}
     </div>
-  </div>
+    </div>
 {% endblock %}
