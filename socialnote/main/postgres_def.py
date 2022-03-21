@@ -73,3 +73,20 @@ def view_colums_table(table_name):
     con.commit()
     con.close()
     return colums_name
+
+
+def view_column_type(table_name):
+    con = psycopg2.connect(
+        database=(DATABASES.get('default')).get("NAME"),
+        user=(DATABASES.get('default')).get("USER"),
+        password=(DATABASES.get('default')).get("PASSWORD"),
+        host=(DATABASES.get('default')).get("HOST"),
+        port=(DATABASES.get('default')).get("PORT")
+    )
+    cur = con.cursor()
+    request_base = (f"SELECT column_name, data_type FROM information_schema.columns WHERE table_name = '{table_name}' ORDER BY ordinal_position; ")
+    cur.execute(request_base)
+    colums_type = cur.fetchall()
+    con.commit()
+    con.close()
+    return colums_type

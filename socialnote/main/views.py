@@ -1,12 +1,11 @@
 import datetime
 import logging
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import HttpResponse
-
 from main.forms import  AddDatabase
 from main.models import Databases, Privates
-from main.postgres_def import create_table, get_the_date
+from main.postgres_def import create_table, get_the_date, view_colums_table, view_column_type
 
 logger = logging.getLogger(__name__)
 
@@ -49,3 +48,8 @@ def add_database(request):
 def table_view(request, db_name):
     bases = get_the_date(db_name)
     return render(request, "main/table_view.html", {"bases": bases})
+
+
+def add_data(request, db_name):
+    bases = view_column_type(db_name)
+    return render(request, "main/add_data.html", {"bases": bases})
