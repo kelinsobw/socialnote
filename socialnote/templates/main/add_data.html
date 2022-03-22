@@ -1,21 +1,31 @@
 {% extends "main/base.html" %}
-{% block title %}Note views{% endblock %}
+{% load crispy_forms_filters %}
+
 {% block content %}
-    <div class="databases">
-        <h1 class="my-4">Latest note</h1>
-        <table>
+    <h1>Add data</h1>
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <script>
+            document.getElementById('div_id_base_2').hidden = true;
+            document.getElementById('div_id_base_3').hidden = true;
+            document.getElementById('div_id_base_4').hidden = true;
+            document.getElementById('div_id_base_5').hidden = true;
+            document.getElementById('div_id_base_6').hidden = true;
+            document.getElementById('div_id_base_7').hidden = true;
+            document.getElementById('div_id_base_8').hidden = true;
+        </script>
 
-            {% for database in bases %}
-            {% for element in database %}
-                <tr>
-                        <p class="card-text">
-                        <p>
-{{ element}}
-                        </p>
+        <button type="submit" class="save btn btn-primary">Save</button>
+        <button type="button" class="save btn btn-primary" id="Add">Add</button>
+        <script>
+            let cout_hide=2
+            document.getElementById("Add").onclick = function () {
 
-                </tr>
-            {% endfor %}
-         {% endfor %}
-        </table>
-    </div>
+                document.getElementById(String('div_id_base_'+String(cout_hide))).hidden = false;
+                cout_hide=cout_hide+1
+            }
+        </script>
+    </form>
+
 {% endblock %}

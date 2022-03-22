@@ -1,5 +1,6 @@
 from django import forms
 
+from main.postgres_def import view_column_type
 
 class AddDatabase(forms.Form):
     type_choice = [
@@ -34,3 +35,14 @@ class AddDatabase(forms.Form):
     base_8 = forms.CharField(required=False)
     type_8 = forms.ChoiceField(choices=type_choice)
 
+
+class AddData(forms.Form):
+
+    base_1 = forms.CharField()
+    base_2 = forms.CharField(required=False)
+    base_3 = forms.CharField(required=False)
+    base_4 = forms.CharField(required=False)
+    base_5 = forms.CharField(required=False)
+    base_6 = forms.CharField(required=False)
+    base_7 = forms.CharField(required=False)
+    base_8 = forms.CharField(required=False)

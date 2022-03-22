@@ -1,9 +1,11 @@
 import datetime
 import logging
 
+from django import forms
 from django.shortcuts import render
 from django.http import HttpResponse
-from main.forms import  AddDatabase
+
+from main.forms import AddDatabase, AddData
 from main.models import Databases, Privates
 from main.postgres_def import create_table, get_the_date, view_colums_table, view_column_type
 
@@ -51,5 +53,15 @@ def table_view(request, db_name):
 
 
 def add_data(request, db_name):
-    bases = view_column_type(db_name)
-    return render(request, "main/add_data.html", {"bases": bases})
+    db_name = db_name
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form = AddData(request.POST, request.FILES)
+            if form.is_valid():
+                info_base = form.cleaned_data
+                print(info_base)
+            return HttpResponse("You don't authenticated!")
+        else:
+            form = AddData()
+        return render(request, "main/add_data.html", {"form": form})
+    return HttpResponse("You don't authenticated!")
