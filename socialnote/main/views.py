@@ -5,9 +5,9 @@ from django import forms
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from main.forms import AddDatabase, AddData
+from main.forms import AddDatabase
 from main.models import Databases, Privates
-from main.postgres_def import create_table, get_the_date, view_colums_table, view_column_type
+from main.postgres_def import create_table, get_the_date, view_colums_table, view_column_type, add_an_enrty
 
 logger = logging.getLogger(__name__)
 
@@ -53,15 +53,31 @@ def table_view(request, db_name):
 
 
 def add_data(request, db_name):
-    db_name = db_name
+    class Forms_add(forms.Form):
+        types = view_column_type(db_name)
+        try: base_1 = forms.CharField(label=types[1])
+        except: pass
+        try: base_2 = forms.CharField(label=types[2])
+        except: pass
+        try: base_3 = forms.CharField(label=types[3])
+        except: pass
+        try: base_4 = forms.CharField(label=types[4])
+        except: pass
+        try: base_5 = forms.CharField(label=types[5])
+        except: pass
+        try: base_6 = forms.CharField(label=types[6])
+        except: pass
+        try: base_7 = forms.CharField(label=types[7])
+        except: pass
+
     if request.user.is_authenticated:
         if request.method == "POST":
-            form = AddData(request.POST, request.FILES)
+            form = Forms_add(request.POST, request.FILES)
             if form.is_valid():
                 info_base = form.cleaned_data
-                print(info_base)
+                add_an_enrty(db_name, info_base)
             return HttpResponse("You don't authenticated!")
         else:
-            form = AddData()
+            form = Forms_add()
         return render(request, "main/add_data.html", {"form": form})
     return HttpResponse("You don't authenticated!")

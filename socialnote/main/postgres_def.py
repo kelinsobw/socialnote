@@ -1,3 +1,5 @@
+import random
+
 import psycopg2
 from socialnote.settings import DATABASES
 
@@ -90,3 +92,25 @@ def view_column_type(table_name):
     con.commit()
     con.close()
     return colums_type
+
+
+def add_an_enrty(table_name, data):
+    print(data) #{'base_1': '1', 'base_2': '1'}
+    print(table_name)
+    str_request = (f"INSERT INTO {table_name} VALUES ({random.randint(2, 10000)}")
+    for key in data:
+        str_request = str_request + (f", '{data.get(key)}'")
+    str_request = str_request + (f");")
+    print(str_request)
+    con = psycopg2.connect(
+        database=(DATABASES.get('default')).get("NAME"),
+        user=(DATABASES.get('default')).get("USER"),
+        password=(DATABASES.get('default')).get("PASSWORD"),
+        host=(DATABASES.get('default')).get("HOST"),
+        port=(DATABASES.get('default')).get("PORT")
+    )
+    cur = con.cursor()
+    cur.execute(str_request)
+    con.commit()
+    con.close()
+
