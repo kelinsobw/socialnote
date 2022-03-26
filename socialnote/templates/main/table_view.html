@@ -3,17 +3,27 @@
 {% block content %}
     <div class="databases">
         <h1 class="my-4">Latest note</h1>
+        <p class="card-text">
         <table>
-            {% for database in bases %}
-                <tr>
-                    {% for element in database %}
-                        <p class="card-text">
-                        <p>
-                        <td> {{ element }} </tr>
-                        </p>
-                    {% endfor %}
-                </tr>
-            {% endfor %}
-        </table>
+    <tbody>
+                {% for base in bases %}
+
+                    <tr>
+                    <td><p>
+
+                </p></td>
+                    {% for element in base %}
+
+                <td><p>
+                  {{ element }}
+                </p></td>
+                {% endfor %}
+
+                    </tr>
+              {% endfor %}
+      </tbody>
+    </table>
+                            <a href=del_data/>Delete</a>
+              </p>
     </div>
 {% endblock %}

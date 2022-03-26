@@ -48,7 +48,21 @@ def add_database(request):
 
 
 def table_view(request, db_name):
+
+    bases_res = []
+    name = []
+    name.append(db_name)
     bases = get_the_date(db_name)
+    bases_temp_1 = bases[1]
+    bases_temp_1 = bases_temp_1[0]
+    for i in range(0, len(bases_temp_1)-1):
+        name.append(" ")
+    bases_res.append(name)
+    bases_res.append(list(bases[0]))
+    for element in bases_temp_1:
+        bases_res.append(list(element))
+    bases = bases_res
+    print(bases)
     return render(request, "main/table_view.html", {"bases": bases})
 
 
@@ -81,3 +95,8 @@ def add_data(request, db_name):
             form = Forms_add()
         return render(request, "main/add_data.html", {"form": form})
     return HttpResponse("You don't authenticated!")
+
+
+def del_data(request):
+    print(request)
+    return HttpResponse("Profiles index view")
