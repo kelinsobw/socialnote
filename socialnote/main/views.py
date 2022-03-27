@@ -14,8 +14,12 @@ logger = logging.getLogger(__name__)
 
 
 def my_list(request):
-    bases = Databases.objects.filter(author=request.user).order_by("-created_at")
-    return render(request, "main/list.html", {"bases": bases})
+    try:
+        bases = Databases.objects.filter(author=request.user).order_by("-created_at")
+    except:
+        return HttpResponse("No data available")
+    return render(request, "main/my_list.html", {"bases": bases})
+
 
 
 def index(request):

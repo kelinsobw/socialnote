@@ -1,7 +1,7 @@
 import logging
 
 from django.conf import settings
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from profiles.models import Profile
@@ -50,14 +50,14 @@ def register_2(request):
     return render(request, "main/register.html", {"form": form})
 
 
-def login(request):
+def login_user(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
             # Process validated data
             logger.info(form.cleaned_data)
-            login(form.email, form.password)
-            return redirect("register_2")
+            user = authenticate(username="harelik", password="Kirito_sun7")
+        return redirect("/home/")
     else:
         form = LoginForm()
-    return render(request, "main/register.html", {"form": form})
+    return render(request, "main/login.html", {"form": form})
