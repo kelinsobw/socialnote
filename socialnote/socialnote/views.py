@@ -1,10 +1,11 @@
 import logging
 
+from django.conf import settings
+from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-
 from profiles.models import Profile
-from socialnote.forms import RegisterForm, RegisterForm_2
+from socialnote.forms import RegisterForm, RegisterForm_2, LoginForm
 
 logger = logging.getLogger(__name__)
 
@@ -36,7 +37,7 @@ def register_2(request):
             # Process validated data
             logger.info(form.cleaned_data)
             profiles = Profile(
-                user=request.user,
+                user=settings.AUTH_USER_MODEL,
                 age=form.cleaned_data["age"],
                 gender=form.cleaned_data["gender"],
                 user_image=form.cleaned_data["user_image"],
@@ -46,4 +47,17 @@ def register_2(request):
             return redirect("register")
     else:
         form = RegisterForm_2()
+    return render(request, "main/register.html", {"form": form})
+
+
+def login(request):
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            # Process validated data
+            logger.info(form.cleaned_data)
+            login(form.email, form.password)
+            return redirect("register_2")
+    else:
+        form = LoginForm()
     return render(request, "main/register.html", {"form": form})

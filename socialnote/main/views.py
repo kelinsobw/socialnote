@@ -41,7 +41,7 @@ def add_database(request):
                     base=my_base,
                     privates=info_base.get("table_privates")
                 )
-            return HttpResponse("You don't authenticated!")
+            return redirect(f"/add_data/{info_base.get('table_name')}")
         else:
             form = AddDatabase()
         return render(request, "main/add_base.html", {"form": form})

@@ -17,3 +17,8 @@ class RegisterForm_2(forms.Form):
     user_image = forms.ImageField(required='')
     country = forms.ChoiceField(choices=Country.country_choice)
     gender = forms.ChoiceField(choices=Gender.gender_choice)
+
+
+class LoginForm(forms.Form):
+    email = forms.EmailField()
+    password = forms.CharField(min_length=8, widget=forms.PasswordInput())
