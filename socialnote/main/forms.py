@@ -8,7 +8,7 @@ class AddDatabase(forms.Form):
         ("SERIAL", 'SERIAL'),
         ("CHAR", 'CHAR'),
         ("VARCHAR", 'VARCHAR'),
-        ("REAL", 'REAL'),
+        ("TEXT", 'TEXT'),
         ("BOOLEAN", 'BOOLEAN')]
     privates = [
         ("None", "None"),
