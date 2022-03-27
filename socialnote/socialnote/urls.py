@@ -25,8 +25,8 @@ urlpatterns = [
     path("", include('main.urls')),
     path("register/", register, name="register"),
     path("add_basadate/", add_database),
-    path("add_basadate/", add_database),
     path("table_view/<str:db_name>", table_view, name="table_view"),
     path("add_data/<str:db_name>", add_data, name="add_data"),
-    path("table_view/del_data/<str:db_name>", del_data, name="del_data")
+    path("del_data/<str:db_name>/<str:id>", del_data, name="del_data"),
+
 ]

@@ -7,11 +7,12 @@
         <table>
     <tbody>
                 {% for base in bases %}
-
                     <tr>
                     <td><p>
+                        <a href="/del_data/{{ bases.0.0 }}/{{ base.0 }}">Delete</a>
 
                 </p></td>
+
                     {% for element in base %}
 
                 <td><p>
@@ -23,7 +24,13 @@
               {% endfor %}
       </tbody>
     </table>
-                            <a href=del_data/>Delete</a>
               </p>
+                    <button type="button" class="save btn btn-primary" id="Add">Add</button>
+
+<script>
+                document.getElementById('Add').onclick = function(event) {
+                window.location.href = '/add_data/{{ bases.0.0 }}';
+                }
+</script>
     </div>
 {% endblock %}

@@ -2,12 +2,13 @@ import datetime
 import logging
 
 from django import forms
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from main.forms import AddDatabase
 from main.models import Databases, Privates
-from main.postgres_def import create_table, get_the_date, view_colums_table, view_column_type, add_an_enrty
+from main.postgres_def import create_table, get_the_date, view_colums_table, view_column_type, add_an_enrty, \
+    delete_record
 
 logger = logging.getLogger(__name__)
 
@@ -62,7 +63,6 @@ def table_view(request, db_name):
     for element in bases_temp_1:
         bases_res.append(list(element))
     bases = bases_res
-    print(bases)
     return render(request, "main/table_view.html", {"bases": bases})
 
 
@@ -90,13 +90,13 @@ def add_data(request, db_name):
             if form.is_valid():
                 info_base = form.cleaned_data
                 add_an_enrty(db_name, info_base)
-            return HttpResponse("You don't authenticated!")
+            return redirect(f"/table_view/{db_name}")
         else:
             form = Forms_add()
         return render(request, "main/add_data.html", {"form": form})
     return HttpResponse("You don't authenticated!")
 
 
-def del_data(request):
-    print(request)
-    return HttpResponse("Profiles index view")
+def del_data(request, db_name, id):
+    delete_record(db_name, id)
+    return redirect(f"/table_view/{db_name}")

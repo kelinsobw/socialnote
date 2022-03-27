@@ -19,6 +19,14 @@
                 </div>
                 </div>
             {% endfor %}
+                        <button type="button" class="save btn btn-primary" id="Add">Add base</button>
+
+<script>
+                document.getElementById('Add').onclick = function(event) {
+                window.location.href = '/add_base/';
+                }
+                </script>
+
     </div>
     </div>
 {% endblock %}
