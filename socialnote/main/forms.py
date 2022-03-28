@@ -1,8 +1,9 @@
 from django import forms
 
-from main.postgres_def import view_column_type
 
+# A form for adding a new table to the database.
 class AddDatabase(forms.Form):
+    # Specify the supported data types
     type_choice = [
         ("INTEGER", 'INTEGER'),
         ("SERIAL", 'SERIAL'),
@@ -10,11 +11,15 @@ class AddDatabase(forms.Form):
         ("VARCHAR", 'VARCHAR'),
         ("TEXT", 'TEXT'),
         ("BOOLEAN", 'BOOLEAN')]
+    # Specify the supported privacy settings
     privates = [
         ("None", "None"),
         ("Friends", "Friends"),
         ("Absolutely", "Absolutely")
     ]
+    # The limit on the number of columns in the table is 8.
+    # We declare all possible ones, and on the frontend we will
+    # fill in only the required number
     table_name = forms.CharField()
     table_description = forms.CharField()
     table_privates = forms.ChoiceField(choices=privates)

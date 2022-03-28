@@ -1,11 +1,12 @@
-import random
+# This file stores functions for working with the POSTGRESQL database.
 
+import random
 import psycopg2
 from socialnote.settings import DATABASES
 
 
 
-
+# Creating a table. We accept the dictionary as an output.
 def create_table(info_base):
     con = psycopg2.connect(
         database=(DATABASES.get('default')).get("NAME"),
@@ -38,6 +39,8 @@ def create_table(info_base):
     con.close()
 
 
+# The function takes the name of the table,
+# makes a query to the database and returns all the data from this table.
 def get_the_date(table_name):
     con = psycopg2.connect(
         database=(DATABASES.get('default')).get("NAME"),
@@ -59,6 +62,8 @@ def get_the_date(table_name):
         return("Basa emply")
 
 
+# The function takes the name of the table, makes a query
+# to the database and returns the names of the columns of the table.
 def view_colums_table(table_name):
     con = psycopg2.connect(
         database=(DATABASES.get('default')).get("NAME"),
@@ -76,6 +81,8 @@ def view_colums_table(table_name):
     return colums_name
 
 
+# The function takes the name of the table, makes a query to the database
+# and returns the column type of the table.
 def view_column_type(table_name):
     con = psycopg2.connect(
         database=(DATABASES.get('default')).get("NAME"),
@@ -93,6 +100,8 @@ def view_column_type(table_name):
     return colums_type
 
 
+# The function accepts the name of the table and the
+# data to be entered into the table. And, in fact, records them.
 def add_an_enrty(table_name, data):
     print(data) #{'base_1': '1', 'base_2': '1'}
     print(table_name)
@@ -114,6 +123,8 @@ def add_an_enrty(table_name, data):
     con.close()
 
 
+# The function takes the name of the table and the id of
+# the record to be deleted. And, in fact, removes it.
 def delete_record(db_name, id):
     con = psycopg2.connect(
         database=(DATABASES.get('default')).get("NAME"),

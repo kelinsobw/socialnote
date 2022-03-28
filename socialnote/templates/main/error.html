@@ -1,0 +1,9 @@
+{% extends "main/base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <h1>Error</h1>
+  <form method="POST" class="post-form">
+    {% csrf_token %}
+  </form>
+{% endblock %}
