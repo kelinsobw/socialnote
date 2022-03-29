@@ -26,7 +26,14 @@ def my_list(request):
 # Retrieves tables of all users from the
 # database and sends them to FRONTEND
 def index(request):
-    bases = Databases.objects.order_by("-created_at")
+    bases = list(Privates.objects.filter(privates="None").values())
+    print(bases)
+    base_id = []
+    for elements in bases:
+        if elements.get("privates") == "None":
+            base_id.append(elements.get("base_id"))
+    print(base_id)
+    bases = Databases.objects.filter(id__in=base_id)
     return render(request, "main/list.html", {"bases": bases})
 
 
@@ -65,7 +72,7 @@ def table_view(request, db_name):
     bases = get_the_date(db_name)
     bases_temp_1 = bases[1]
     bases_temp_1 = bases_temp_1[0]
-    for i in range(0, len(bases_temp_1)-1):
+    for i in range(0, len(bases_temp_1) - 1):
         name.append(" ")
     bases_res.append(name)
     bases_res.append(list(bases[0]))
@@ -79,23 +86,37 @@ def table_view(request, db_name):
 def add_data(request, db_name):
     base_author = Databases.objects.filter(db_name=db_name, author=request.user).values()
     if len(base_author) == 1:
-        #A dynamic form for adding data to a table. It has 8 fields, the required number is used on the frontend
+        # A dynamic form for adding data to a table. It has 8 fields, the required number is used on the frontend
         class Forms_add(forms.Form):
             types = view_column_type(db_name)
-            try: base_1 = forms.CharField(label=types[1])
-            except: pass
-            try: base_2 = forms.CharField(label=types[2])
-            except: pass
-            try: base_3 = forms.CharField(label=types[3])
-            except: pass
-            try: base_4 = forms.CharField(label=types[4])
-            except: pass
-            try: base_5 = forms.CharField(label=types[5])
-            except: pass
-            try: base_6 = forms.CharField(label=types[6])
-            except: pass
-            try: base_7 = forms.CharField(label=types[7])
-            except: pass
+            try:
+                base_1 = forms.CharField(label=types[1])
+            except:
+                pass
+            try:
+                base_2 = forms.CharField(label=types[2])
+            except:
+                pass
+            try:
+                base_3 = forms.CharField(label=types[3])
+            except:
+                pass
+            try:
+                base_4 = forms.CharField(label=types[4])
+            except:
+                pass
+            try:
+                base_5 = forms.CharField(label=types[5])
+            except:
+                pass
+            try:
+                base_6 = forms.CharField(label=types[6])
+            except:
+                pass
+            try:
+                base_7 = forms.CharField(label=types[7])
+            except:
+                pass
 
         if request.user.is_authenticated:
             if request.method == "POST":
@@ -110,6 +131,7 @@ def add_data(request, db_name):
         return HttpResponse("You don't authenticated!")
     else:
         return redirect("/error")
+
 
 # The function deletes a specific record in a specific table
 def del_data(request, db_name, id):

@@ -40,7 +40,7 @@ def register_2(request):
             # Process validated data
             logger.info(form.cleaned_data)
             profiles = Profile(
-                username=request.user,
+                user=request.user,
                 age=form.cleaned_data["age"],
                 gender=form.cleaned_data["gender"],
                 user_image=form.cleaned_data["user_image"],
@@ -56,6 +56,7 @@ def register_2(request):
 # User authorization function
 def login_user(request):
     if request.method == "POST":
+        logout(request)
         form = LoginForm(request.POST)
         if form.is_valid():
             # Process validated data

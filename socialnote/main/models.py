@@ -11,7 +11,9 @@ class Databases(models.Model):
     db_description = models.CharField(max_length=30)
     created_at = models.DateTimeField(auto_now_add=True, db_index=True)
 
+
 # This table contains data about database privacy.
 class Privates(models.Model):
     base = models.ForeignKey(Databases, on_delete=models.CASCADE)
     privates = models.CharField(max_length=10)
+
