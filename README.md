@@ -19,9 +19,9 @@ Setup dev environment
 
 
 
-2. Install [Python 3.8](https://www.python.org/downloads/source/)
+2. Install [Python 3.8]
    
-3. Install [Postgres server](https://www.postgresql.org/download/linux/ubuntu/)
+3. Install [Postgres server]
 
 
 
@@ -41,7 +41,7 @@ Build and run app in dev mode
         # CREATE USER note WITH PASSWORD 'note' CREATEDB;
 
         $ psql -h localhost -U note
-        # CREATE DATABASE manti_by;
+        # CREATE DATABASE note;
 
 
 4. Migrate, collect static files and create admin user
