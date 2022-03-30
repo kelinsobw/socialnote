@@ -30,7 +30,7 @@ Build and run app in dev mode
 
 1. Create virtual environment and install project dependencies
 
-        $ python3.9 -m venv --prompt="mnt" .venv/
+        $ python3.8 -m venv --prompt="mnt" .venv/
         $ source ../venv/bin/activate
         $ pip install -r requirements.txt
 
